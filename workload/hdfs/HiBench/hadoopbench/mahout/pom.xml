@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.intel.hibench</groupId>
+    <artifactId>hadoopbench</artifactId>
+    <version>8.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.intel.hibench.hadoopbench</groupId>
+  <artifactId>mahout</artifactId>
+  <packaging>jar</packaging>
+
+  <properties>
+    <repo1>http://archive.apache.org</repo1>
+    <file1>dist/mahout/0.11.0/apache-mahout-distribution-0.11.0.tar.gz</file1>
+    <checksum1>32bb8d9429671c651ff8233676739f1f</checksum1>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>download-maven-plugin</artifactId>
+        <version>${download-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>${repo1}/${file1}</url>
+              <md5>${checksum1}</md5>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

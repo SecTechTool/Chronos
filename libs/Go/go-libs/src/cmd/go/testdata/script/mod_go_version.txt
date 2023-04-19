@@ -1,0 +1,27 @@
+# Test support for declaring needed Go version in module.
+
+env GO111MODULE=on
+
+go list
+! go build sub
+stderr '^sub: module requires Go 1.999 or later$'
+
+-- go.mod --
+module m
+go 1.1
+require (
+	sub v1.0.0
+)
+replace (
+	sub => ./sub
+)
+
+-- x.go --
+package x
+
+-- sub/go.mod --
+module m
+go 1.999
+
+-- sub/x.go --
+package x
